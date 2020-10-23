@@ -5,10 +5,11 @@
 
 // For std::isalpha and std::isupper
 #include <cctype>
+
 #include "TransformChar.hpp"
 #include "ProcessCommandLine.hpp"
 
-
+#include <fstream>
 
 
 
@@ -35,11 +36,46 @@ int main(int argc, char* argv[])
 		     inputFile,
 		     outputFile);
 
-  while(std::cin >> inputChar)
+
+  if (!inputFile.empty())
     {
-      inputText+=transformChar(inputChar);
+      std::ifstream in_file {inputFile};
+      if (in_file.good())
+	{
+	  while(in_file >> inputChar)
+	    {
+	      inputText+=transformChar(inputChar);
+	    }
+	}
     }
-  std::cout << inputText << std::endl;
+  else
+    {
+      while(std::cin >> inputChar)
+	{
+	  inputText+=transformChar(inputChar);
+	}
+    }
+
+
+
+
+
+
+
+  if (!outputFile.empty())
+    {
+      std::ofstream out_file {outputFile};
+      if (out_file.good())
+	{
+	  out_file << inputText << std::endl;
+	}
+    }
+  else
+    {
+      std::cout << inputText << std::endl;
+
+    }
+
   // No requirement to return from main, but we do so for clarity
   // and for consistency with other functions
   return 0;

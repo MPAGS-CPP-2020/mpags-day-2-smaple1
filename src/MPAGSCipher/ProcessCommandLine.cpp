@@ -13,6 +13,8 @@ bool processCommandLine(const std::vector<std::string>& args,
 			std::string& inputFile,
 			std::string& outputFile)
 {
+  bool processStatus(true);
+  
   const size_type nCmdLineArgs {args.size()};
 
   // Process command line arguments - ignore zeroth element, as we know this to
@@ -99,5 +101,5 @@ bool processCommandLine(const std::vector<std::string>& args,
               << outputFile
               << "') not implemented yet, using stdout\n";
   }
-  return 0;
+  return processStatus;
 }
