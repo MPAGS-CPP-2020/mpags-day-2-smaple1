@@ -5,6 +5,70 @@
 
 // For std::isalpha and std::isupper
 #include <cctype>
+// Forward declarations
+std::string transformChar(const char in_char);
+
+
+  // Initialise variables for processing input text
+char inputChar {'x'};
+std::string inputText {""};
+
+  // // Read in user input from stdin/file
+  // // Warn that input file option not yet implemented
+  // if (!inputFile.empty()) {
+// std::cout << "[warning] input from file ('"
+// << inputFile
+// << "') not implemented yet, using stdin\n";
+// }
+
+std::string transformChar(const char in_char)
+{
+  /* Function which takes an input character, applies the cipher,
+     then adds it to the inputText defined earlier */
+  std::string newChar {""};
+
+  if (std::isalpha(in_char)) {
+    newChar += std::toupper(in_char);
+  }
+
+    // Transliterate digits to English words
+  switch (in_char) {
+  case '0':
+    newChar += "ZERO";
+    break;
+  case '1':
+    newChar += "ONE";
+    break;
+  case '2':
+    newChar += "TWO";
+    break;
+  case '3':
+    newChar += "THREE";
+    break;
+  case '4':
+    newChar += "FOUR";
+    break;
+  case '5':
+    newChar += "FIVE";
+    break;
+  case '6':
+    newChar += "SIX";
+    break;
+  case '7':
+    newChar += "SEVEN";
+    break;
+  case '8':
+    newChar += "EIGHT";
+    break;
+  case '9':
+    newChar += "NINE";
+    break;
+  }
+
+    // If the character isn't alphabetic or numeric, DONT add it.
+    // Our ciphers can only operate on alphabetic characters.
+    return newChar;
+  }
 
 // Main function of the mpags-cipher program
 int main(int argc, char* argv[])
@@ -94,65 +158,6 @@ int main(int argc, char* argv[])
     return 0;
   }
 
-  // Initialise variables for processing input text
-  char inputChar {'x'};
-  std::string inputText {""};
-
-  // Read in user input from stdin/file
-  // Warn that input file option not yet implemented
-  if (!inputFile.empty()) {
-    std::cout << "[warning] input from file ('"
-              << inputFile
-              << "') not implemented yet, using stdin\n";
-  }
-
-  // Loop over each character from user input
-  // (until Return then CTRL-D (EOF) pressed)
-  while(std::cin >> inputChar)
-  {
-    // Uppercase alphabetic characters
-    if (std::isalpha(inputChar)) {
-      inputText += std::toupper(inputChar);
-      continue;
-    }
-
-    // Transliterate digits to English words
-    switch (inputChar) {
-      case '0':
-	inputText += "ZERO";
-	break;
-      case '1':
-	inputText += "ONE";
-	break;
-      case '2':
-	inputText += "TWO";
-	break;
-      case '3':
-	inputText += "THREE";
-	break;
-      case '4':
-	inputText += "FOUR";
-	break;
-      case '5':
-	inputText += "FIVE";
-	break;
-      case '6':
-	inputText += "SIX";
-	break;
-      case '7':
-	inputText += "SEVEN";
-	break;
-      case '8':
-	inputText += "EIGHT";
-	break;
-      case '9':
-	inputText += "NINE";
-	break;
-    }
-
-    // If the character isn't alphabetic or numeric, DONT add it.
-    // Our ciphers can only operate on alphabetic characters.
-  }
 
   // Output the transliterated text
   // Warn that output file option not yet implemented
@@ -162,6 +167,10 @@ int main(int argc, char* argv[])
               << "') not implemented yet, using stdout\n";
   }
 
+  while(std::cin >> inputChar)
+    {
+      std::cout << transformChar(inputChar);
+    }
   std::cout << inputText << std::endl;
 
   // No requirement to return from main, but we do so for clarity
