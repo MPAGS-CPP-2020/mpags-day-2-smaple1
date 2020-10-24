@@ -11,9 +11,11 @@ bool processCommandLine(const std::vector<std::string>& args,
 			bool& helpRequested,
 			bool& versionRequested,
 			std::string& inputFile,
-			std::string& outputFile)
+			std::string& outputFile,
+			std::string& key,
+			bool& encrypt)
+  
 {
-  bool processStatus(true);
   
   const size_type nCmdLineArgs {args.size()};
 
@@ -55,6 +57,22 @@ bool processCommandLine(const std::vector<std::string>& args,
 	++i;
       }
     }
+    else if (args[i] == "-k" || args[i] == "--key") {
+      if (i == nCmdLineArgs-1) {
+	std::cerr << "[error] key requires an integer argument" << std::endl;
+	return 1;
+      }
+      else {
+	key = args[i+1];
+	++i;
+      }
+    }
+    else if (args[i] == "--encrypt") {
+      encrypt = true;
+    }
+    else if (args[i] == "--decrypt") {
+      encrypt = false;
+    }
     else {
       // Have an unknown flag to output error message and return non-zero
       // exit status to indicate failure
@@ -87,19 +105,6 @@ bool processCommandLine(const std::vector<std::string>& args,
     std::cout << "0.1.0" << std::endl;
     return 0;
   }
-  // Read in user input from stdin/file
-  // Warn that input file option not yet implemented
-  if (!inputFile.empty()) {
-    std::cout << "[warning] input from file ('"
-	      << inputFile
-	      << "') not implemented yet, using stdin\n";
-  }
-  // Output the transliterated text
-  // Warn that output file option not yet implemented
-  if (!outputFile.empty()) {
-    std::cout << "[warning] output to file ('"
-              << outputFile
-              << "') not implemented yet, using stdout\n";
-  }
-  return processStatus;
+
+  return 0;
 }

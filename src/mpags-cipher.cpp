@@ -12,10 +12,6 @@
 #include <fstream>
 
 
-
-
-
-
 // Main function of the mpags-cipher program
 int main(int argc, char* argv[])
 {
@@ -25,6 +21,8 @@ int main(int argc, char* argv[])
   bool versionRequested {false};
   std::string inputFile {""};
   std::string outputFile {""};
+  std::string key {""};
+  bool encrypt {true};
 
   // Initialise variables for processing input text
   char inputChar {'x'};
@@ -34,7 +32,9 @@ int main(int argc, char* argv[])
 		     helpRequested,
 		     versionRequested,
 		     inputFile,
-		     outputFile);
+		     outputFile,
+		     key,
+		     encrypt);
 
 
   if (!inputFile.empty())
