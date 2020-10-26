@@ -28,6 +28,7 @@ int main(int argc, char* argv[])
   // Initialise variables for processing input text
   char inputChar {'x'};
   std::string inputText {""};
+  std::string outputText {""};
 
   processCommandLine(args,
 		     helpRequested,
@@ -38,6 +39,7 @@ int main(int argc, char* argv[])
 		     encrypt);
 
 
+  
   if (!inputFile.empty())
     {
       std::ifstream in_file {inputFile};
@@ -62,7 +64,11 @@ int main(int argc, char* argv[])
   if (!cipherKey.empty())
     {
       key = std::stoul(cipherKey);
-      runCaesarCipher(inputText, key, encrypt);
+      outputText = runCaesarCipher(inputText, key, encrypt);
+    }
+  else
+    {
+      outputText = inputText;
     }
 
 
@@ -73,12 +79,12 @@ int main(int argc, char* argv[])
       std::ofstream out_file {outputFile};
       if (out_file.good())
 	{
-	  out_file << inputText << std::endl;
+	  out_file << outputText << std::endl;
 	}
     }
   else
     {
-      std::cout << inputText << std::endl;
+      std::cout << outputText << std::endl;
     }
 
   // No requirement to return from main, but we do so for clarity
