@@ -12,7 +12,7 @@ bool processCommandLine(const std::vector<std::string>& args,
 			bool& versionRequested,
 			std::string& inputFile,
 			std::string& outputFile,
-			std::string& key,
+			std::string& cipherKey,
 			bool& encrypt)
   
 {
@@ -63,7 +63,7 @@ bool processCommandLine(const std::vector<std::string>& args,
 	return 1;
       }
       else {
-	key = args[i+1];
+	cipherKey = args[i+1];
 	++i;
       }
     }

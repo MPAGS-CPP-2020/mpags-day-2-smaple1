@@ -6,7 +6,7 @@ project(MPAGSCipher VERSION 0.1.0)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
 # Declare the build of the mpags-cipher main program
-add_executable(mpags-cipher.out mpags-cipher.cpp MPAGSCipher/TransformChar.cpp MPAGSCipher/ProcessCommandLine.cpp)
+add_executable(mpags-cipher.out mpags-cipher.cpp MPAGSCipher/TransformChar.cpp MPAGSCipher/ProcessCommandLine.cpp MPAGSCipher/RunCaesarCipher.cpp)
 
 target_include_directories(mpags-cipher.out
   PRIVATE MPAGSCipher

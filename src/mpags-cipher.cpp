@@ -8,6 +8,7 @@
 
 #include "TransformChar.hpp"
 #include "ProcessCommandLine.hpp"
+#include "RunCaesarCipher.hpp"
 
 #include <fstream>
 
@@ -21,7 +22,7 @@ int main(int argc, char* argv[])
   bool versionRequested {false};
   std::string inputFile {""};
   std::string outputFile {""};
-  std::string key {""};
+  std::string cipherKey {""};
   bool encrypt {true};
 
   // Initialise variables for processing input text
@@ -33,7 +34,7 @@ int main(int argc, char* argv[])
 		     versionRequested,
 		     inputFile,
 		     outputFile,
-		     key,
+		     cipherKey,
 		     encrypt);
 
 
@@ -56,8 +57,13 @@ int main(int argc, char* argv[])
 	}
     }
 
-
-
+  /// Run Caesar Cipher here
+  size_t key {0};
+  if (!cipherKey.empty())
+    {
+      key = std::stoul(cipherKey);
+      runCaesarCipher(inputText, key, encrypt);
+    }
 
 
 
@@ -73,7 +79,6 @@ int main(int argc, char* argv[])
   else
     {
       std::cout << inputText << std::endl;
-
     }
 
   // No requirement to return from main, but we do so for clarity
